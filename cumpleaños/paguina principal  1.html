@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Mis 15 años</title>
+    <script>
+        function abrirInvitacion() {
+            document.getElementById("mensaje-emergente").style.display = "none";
+            const video = document.getElementById("video-container");
+            video.style.display = "flex"; // Muestra el contenedor del video
+            const miVideo = document.querySelector("#video-container video");
+    
+            miVideo.muted = false; // Habilita el sonido
+            miVideo.play(); // Reproduce el video
+    
+            // Configura el temporizador para ocultar el video y mostrar el contenido después de 32 segundos
+            setTimeout(() => {
+                video.style.display = "none"; // Oculta el video
+                document.body.style.overflow = "auto"; // Permite desplazarse nuevamente
+                document.getElementById("contenido").style.display = "block"; // Muestra el contenido
+            }, 32000); // 32 segundos
+        }
+    </script>
+    
+</head>
+
+<body>
+    <!-- Bienvenida inicial -->
+    <div id="mensaje-emergente" class="mensaje-emergente">
+        <h1>¡Bienvenido!</h1>
+        <button onclick="abrirInvitacion()">Abrir Invitación</button>
+    </div>
+
+    <!-- Contenedor del video emergente -->
+    <div id="video-container" class="video-emergente" style="display: none;">
+        <video autoplay muted playsinline>
+            <source src="15 dayi.mp4" type="video/mp4">
+            Tu navegador no soporta el video.
+        </video>
+    </div>
+
+    <!-- Contenido principal -->
+    <div id="contenido" class="contenido" style="display: none;">
+        <h1>Mis XV</h1>
+        <h1>DAYANA</h1>
+        <img src="cumpleanero.jpg" alt="Cumpleañero" class="foto-cumpleanero">
+        <h2>Escucha la canción</h2>
+
+        <audio controls>
+            <source src="cancion.mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+
+        <div class="descripcion">
+            <h3>Descripción de la fiesta</h3>
+            <p>✨¡Te invitamos a celebrar mis 15 años! Un día especial lleno de música, baile y diversión.</p>
+            <p>Con mucha alegría, te invito a celebrar conmigo este momento tan importante en mi vida. Será una velada mágica llena de música, baile y momentos inolvidables.</p>
+            <p>Tu presencia hará que esta celebración sea aún más especial. ¡Prepárate para disfrutar y compartir en grande! 🎉</p>
+        </div>
+
+        <h3>Ubicación de la fiesta</h3>
+        <p>
+            <a href="https://www.google.com.ec/maps/@-3.2674952,-79.955235,3a,75y,132.64h,88.16t/data=!3m7!1e1!3m5!1sDeRHaninci8OzOf7ii4NIQ!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D1.839559156913495%26panoid%3DDeRHaninci8OzOf7ii4NIQ%26yaw%3D132.64464417912137!7i13312!8i6656?hl=es&entry=ttu&g_ep=EgoyMDI0MTExOS4yIKXMDSoASAFQAw%3D%3D" target="_blank">Ver en Google Maps</a>
+        </p>
+
+        <div class="cuenta-regresiva">
+            <h3>Cuenta regresiva al evento</h3>
+            <p id="contador"></p>
+        </div>
+
+        <div class="descripcion">
+            <h3>Detalles del evento</h3>
+            <p>Ceremonia religiosa: Te esperamos el sábado 30 de noviembre a las 19:30 horas en la Catedral de Machala para dar inicio a esta celebración tan especial.</p>
+            <p>Recepción: Luego, acompáñanos a la fiesta en el Colegio de Ingenieros Civiles de El Oro, ubicado en las calles Arízaga y 10 de Agosto, a partir de las 20:00 horas.</p>
+            <p>Será una noche inolvidable, ¡esperamos contar con tu presencia! ✨</p>
+        </div>
+    </div>
+
+    <script>
+        // Configuración de la cuenta regresiva
+        const fechaEvento = new Date("2024-11-30T20:00:00").getTime();
+        const x = setInterval(function () {
+            const ahora = new Date().getTime();
+            const distancia = fechaEvento - ahora;
+
+            const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+
+            document.getElementById("contador").innerHTML =
+                dias + "d " + horas + "h " + minutos + "m " + segundos + "s ";
+
+            if (distancia < 0) {
+                clearInterval(x);
+                document.getElementById("contador").innerHTML = "¡El evento ha comenzado!";
+            }
+        }, 1000);
+    </script>
+</body>
+
+</html>
